@@ -3,6 +3,8 @@ name = "img-archive-parser"
 version = "0.1.0"
 edition = "2021"
 exclude = ["tests/*"]
+license = "MIT"
+description = "This library provides a Rust implementation for reading and extracting files from [IMG Archives](https://gtamods.com/wiki/IMG_archive)"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
