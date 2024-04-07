@@ -34,7 +34,7 @@ impl<B: Read + Seek> IMGArchive<B> {
     }
 
     pub fn extract<W: Write>(&mut self, entry: &Entry, writer: &mut W) -> std::io::Result<()> {
-        let current_pos = self.buffer.seek(SeekFrom::Current(0))?;
+        let current_pos = self.buffer.stream_position()?;
 
         // Every file contained in the img archive must be sector aligned,
         // where the size of each sector is 2048 bytes.
@@ -58,7 +58,7 @@ impl<B: Read + Seek> Iterator for IMGArchive<B> {
     type Item = Result<Entry, Box<dyn std::error::Error>>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let current_pos = match self.buffer.seek(SeekFrom::Current(0)) {
+        let current_pos = match self.buffer.stream_position() {
             Ok(pos) => pos,
             Err(e) => return Some(Err(e.into())),
         };
